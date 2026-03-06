@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Impressionism Art Era</title>
+
+    <style>
+        /* Base page styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f7f7f7;
+            color: #000000;
+        }
+
+        header {
+            background: #f7f7f7;
+            color: black;
+            padding: 30px 0;
+        }
+
+        /* Toggle button */
+        #toggle-btn {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1001;
+            background: #f7f7f7;
+            color: #000000;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        /* Sidebar */
+        #sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 220px;
+            height: 100vh;
+            background: #f7f7f7;
+            color: #000000;
+            padding: 20px;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        #sidebar h2 {
+            margin-bottom: 20px;
+            font-size: 20px;
+            border-bottom: 1px solid #fff;
+            padding-bottom: 10px;
+        }
+
+        #sidebar a {
+            display: block;
+            color: #000000;
+            text-decoration: none;
+            margin: 10px 0;
+            padding: 6px 0;
+        }
+
+        #sidebar a:hover {
+            background: #f7f7f7;
+            color: #000000;
+        }
+
+        /* Sidebar visible */
+        #sidebar.open {
+            transform: translateX(0);
+        }
+
+        /* Main content (layout, not typography) */
+        main.layout-main {
+            padding: 40px 20px;
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+        }
+
+        main.layout-main.shifted {
+            margin-left: 220px;
+        }
+
+        /* Optional: basic responsiveness for sidebar */
+        @media (min-width: 768px) {
+            #sidebar {
+                transform: translateX(0);
+            }
+
+            main.layout-main {
+                margin-left: 220px;
+            }
+
+            #toggle-btn {
+                display: none;
+            }
+        }
+
+        /* Dropdown container */
+        .dropdown {
+            position: relative;
+        }
+
+        /* Main Artists link (click to toggle for now) */
+        .dropdown-main {
+            display: block;
+            color: #000000;
+            text-decoration: none;
+            margin: 10px 0;
+            padding: 6px 0;
+            cursor: pointer;
+        }
+
+        /* Dropdown menu */
+        .dropdown-menu {
+            display: none;
+            margin-left: 10px;
+        }
+
+        /* Links inside dropdown */
+        .dropdown-menu a {
+            display: block;
+            color: #000000;
+            text-decoration: none;
+            margin: 6px 0;
+            padding: 4px 0;
+            font-size: 14px;
+        }
+
+        .dropdown-menu a:hover {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        /* Show dropdown when open class is added */
+        .dropdown.open .dropdown-menu {
+            display: block;
+        }
+
+        /* HERO + CARDS STYLING */
+
+        .hero {
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            color: white;
+            background-image:
+                linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url("https://media02.stockfood.com/largepreviews/MjIxMTc4MDY1Mw==/71347763-France-Eure-Giverny-Claude-Monet-Foundation-the-japonese-garden-with-wisteria-in-blossom.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* This main controls width of page content, not layout shift */
+        .content-wrapper {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px 0;
+            background: #f7f7f7;
+            color: #000000;
+        }
+
+        .hero-large-cards {
+            height: 60vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-overlay {
+            color: white;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-overlay h1 {
+            font-size: 4rem;
+            margin: 0 0 20px 0;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-overlay p {
+            font-size: 1.4rem;
+            margin: 0 0 30px 0;
+            opacity: 0.95;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 15px 40px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Large Square Cards */
+        .artwork-cards {
+            padding: 80px 20px;
+            background: #f8f9fa;
+        }
+
+        .card-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+            justify-items: center;
+        }
+
+        .art-card {
+            width: 450px;
+            height: 450px;
+            display: block;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            text-decoration: none;
+        }
+
+        .art-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.4s ease;
+        }
+
+        .art-card:hover .card-image {
+            transform: scale(1.1);
+        }
+
+        .card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            color: white;
+            padding: 40px 30px 30px;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .art-card:hover .card-overlay {
+            transform: translateY(0);
+        }
+
+        .card-overlay h3 {
+            font-size: 1.8rem;
+            margin: 0 0 8px 0;
+            font-weight: 700;
+        }
+
+        .card-overlay p {
+            font-size: 1.1rem;
+            margin: 0;
+            opacity: 0.95;
+        }
+
+        /* Specific artwork backgrounds */
+        .monet-card .card-image {
+            background-image:
+                linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),
+                url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Monet_-_Impression%2C_Sunrise.jpg/960px-Monet_-_Impression%2C_Sunrise.jpg');
+        }
+
+        .renoir-card .card-image {
+            background-image:
+                linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),
+                url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Renoir%2C_Pierre-Auguste_-_Dance_at_Le_Moulin_de_la_Galette%2C_1876.jpg/960px-Renoir%2C_Pierre-Auguste_-_Dance_at_Le_Moulin_de_la_Galette%2C_1876.jpg');
+        }
+
+        .degas-card .card-image {
+            background-image:
+                linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),
+                url('https://upload.wikimedia.org/wikipedia/commons/c/c3/Edgar_Degas%2C_The_Rehearsal%2C_c._1874..jpg');
+        }
+
+        .morisot-card .card-image {
+            background-image:
+                linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),
+                url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Berthe_Morisot_008.jpg/500px-Berthe_Morisot_008.jpg');
+        }
+
+        /* Responsive cards */
+        @media (max-width: 1000px) {
+            .art-card {
+                width: 400px;
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 850px) {
+            .card-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .art-card {
+                width: 350px;
+                height: 350px;
+            }
+
+            .hero-overlay h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .art-card {
+                width: 300px;
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar toggle button -->
+    <button id="toggle-btn">☰ Menu</button>
+
+    <!-- Sidebar navigation -->
+    <nav id="sidebar">
+        <img src="art-History-1.jpg" alt="Art Movements Logo"
+            style="width: 100%; max-width: 180px; margin-bottom: 20px; display: block;" />
+        <a href="#home">Home</a>
+        <a href="#history">History</a>
+        <a href="#gallery">Gallery</a>
+        <a href="artists.html">Artists</a>
+
+        <div class="dropdown">
+            <a href="#artists" class="dropdown-main">More ▾</a>
+            <div class="dropdown-menu">
+                <a href="#manet">Manet</a>
+                <a href="#pissarro">Pissarro</a>
+                <a href="#sisley">Sisley</a>
+                <a href="#monet">Monet</a>
+                <a href="#renoir">Renoir</a>
+                <a href="#morisot">Morisot</a>
+                <a href="#cassatt">Cassatt</a>
+                <a href="#degas">Degas</a>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <center>
+            <h1> The Immpressionist Art Era </h1>
+        </center>
+    </header>
+
+    <!-- Main layout container (used for sidebar shifting) -->
+    <main class="layout-main">
+        <!-- Your existing content -->
+        <section class="artwork-cards">
+            <div class="card-container">
+                <!-- Card 1: Monet -->
+                <a href="monet.html" class="art-card monet-card">
+                    <div class="card-image"></div>
+                    <div class="card-overlay">
+                        <h3>Claude Monet</h3>
+                        <p>Impression, Sunrise (1872)</p>
+                    </div>
+                </a>
+
+                <!-- Card 2: Renoir -->
+                <a href="renoir.html" class="art-card renoir-card">
+                    <div class="card-image"></div>
+                    <div class="card-overlay">
+                        <h3>Pierre-Auguste Renoir</h3>
+                        <p>Dance at Le Moulin de la Galette (1876)</p>
+                    </div>
+                </a>
+
+                <!-- Card 3: Degas -->
+                <a href="degas.html" class="art-card degas-card">
+                    <div class="card-image"></div>
+                    <div class="card-overlay">
+                        <h3>Edgar Degas</h3>
+                        <p>The Ballet Rehearsal (1874)</p>
+                    </div>
+                </a>
+
+                <!-- Card 4: Morisot -->
+                <a href="morisot.html" class="art-card morisot-card">
+                    <div class="card-image"></div>
+                    <div class="card-overlay">
+                        <h3>Berthe Morisot</h3>
+                        <p>The Cradle (1872)</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Allison | All Rights Reserved</p>
+    </footer>
+
+    <!-- Clean JS: no src, no duplicates -->
+    <script>
+        // Sidebar toggle
+        const btn = document.getElementById('toggle-btn');
+        const sidebar = document.getElementById('sidebar');
+        const layoutMain = document.querySelector('main.layout-main');
+
+        btn.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            layoutMain.classList.toggle('shifted');
+        });
+
+        // Dropdown toggle
+        const dropdown = document.querySelector('.dropdown');
+        const dropdownMain = document.querySelector('.dropdown-main');
+
+        dropdownMain.addEventListener('click', (e) => {
+            e.preventDefault(); // stops jumping to #artists, only toggles
+            dropdown.classList.toggle('open');
+        });
+    </script>
+</body>
+
+</html>
