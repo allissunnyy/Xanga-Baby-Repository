@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Camille Pissarro – Impressionism Art Era</title>
+
+    <style>
+        /* Base page styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f7f7f7;
+            color: #000000;
+        }
+
+        header {
+            background: #f7f7f7;
+            color: black;
+            padding: 30px 0;
+        }
+
+        /* Toggle button */
+        #toggle-btn {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1001;
+            background: #f7f7f7;
+            color: #000000;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        /* Sidebar */
+        #sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 220px;
+            height: 100vh;
+            background: #f7f7f7;
+            color: #000000;
+            padding: 20px;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        #sidebar h2 {
+            margin-bottom: 20px;
+            font-size: 20px;
+            border-bottom: 1px solid #fff;
+            padding-bottom: 10px;
+        }
+
+        #sidebar a {
+            display: block;
+            color: #000000;
+            text-decoration: none;
+            margin: 10px 0;
+            padding: 6px 0;
+        }
+
+        #sidebar a:hover {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        /* Sidebar visible */
+        #sidebar.open {
+            transform: translateX(0);
+        }
+
+        /* Main layout container (for sidebar shift) */
+        main.layout-main {
+            padding: 40px 20px;
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+        }
+
+        main.layout-main.shifted {
+            margin-left: 220px;
+        }
+
+        /* Optional: basic responsiveness for sidebar */
+        @media (min-width: 768px) {
+            #sidebar {
+                transform: translateX(0);
+            }
+
+            main.layout-main {
+                margin-left: 220px;
+            }
+
+            #toggle-btn {
+                display: none;
+            }
+        }
+
+        /* Dropdown container */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-main {
+            display: block;
+            color: #000000;
+            text-decoration: none;
+            margin: 10px 0;
+            padding: 6px 0;
+            cursor: pointer;
+        }
+
+        .dropdown-menu {
+            display: none;
+            margin-left: 10px;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            color: #000000;
+            text-decoration: none;
+            margin: 6px 0;
+            padding: 4px 0;
+            font-size: 14px;
+        }
+
+        .dropdown-menu a:hover {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        .dropdown.open .dropdown-menu {
+            display: block;
+        }
+
+        /* Hero styling for artist page */
+        .hero {
+            min-height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            color: white;
+            background-image:
+                linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url("https://upload.wikimedia.org/wikipedia/commons/4/4f/Pissarro_Hyde_Park.jpg?_=20070905150043");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .content-wrapper {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .content-wrapper h1,
+        .content-wrapper h2 {
+            margin-bottom: 16px;
+        }
+
+        .content-wrapper p {
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px 0;
+            background: #f7f7f7;
+            color: #000000;
+        }
+
+        /* Artwork gallery simplified to match site aesthetic */
+        .artwork-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0 40px 0;
+            justify-items: center;
+        }
+
+        .artwork-gallery.figure {
+            margin: 0;
+        }
+
+        .artwork-gallery figure {
+            margin: 0;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .artwork-gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: block;
+        }
+
+        .artwork-gallery figcaption {
+            margin-top: 8px;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar toggle button -->
+    <button id="toggle-btn">☰ Menu</button>
+
+    <!-- Sidebar navigation -->
+    <nav id="sidebar">
+        <h2>Logo</h2>
+        <a href="Impressionism.html">Home</a>
+        <a href="history.html">History</a>
+        <a href="examples.html">Gallery</a>
+        <a href="artists.html">Artists</a>
+
+        <div class="dropdown">
+            <a href="#artists" class="dropdown-main">More ▾</a>
+            <div class="dropdown-menu">
+                <a href="manet.html">Manet</a>
+                <a href="pissarro.html">Pissarro</a>
+                <a href="sisley.html">Sisley</a>
+                <a href="monet.html">Monet</a>
+                <a href="renoir.html">Renoir</a>
+                <a href="morisot.html">Morisot</a>
+                <a href="cassatt.html">Cassatt</a>
+                <a href="degas.html">Degas</a>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <center>
+            <h1>The Impressionist Art Era</h1>
+        </center>
+    </header>
+
+    <!-- Main layout container -->
+    <main class="layout-main">
+        <!-- Hero for Pissarro -->
+        <section class="hero" id="pissarro">
+            <h1>Camille Pissarro</h1>
+        </section>
+
+        <!-- Page content -->
+        <section class="content-wrapper">
+            <h1>Camille Pissarro (1830–1903)</h1>
+
+            <p>The eldest of the Impressionists, Pissarro was a mentor figure who exhibited in all eight Impressionist
+                shows. His landscapes captured both rural tranquility and urban bustle with atmospheric sensitivity.</p>
+
+            <h2>Key Works</h2>
+            <div class="artwork-gallery">
+                <figure>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Camille_Pissarro%2C_The_Boulevard_Montmartre_at_Night%2C_1897.jpg/960px-Camille_Pissarro%2C_The_Boulevard_Montmartre_at_Night%2C_1897.jpg?_=20140117165918"
+                        alt="Boulevard Montmartre, 1897" />
+                    <figcaption>Boulevard Montmartre, 1897</figcaption>
+                </figure>
+
+                <figure>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Apple_Harvest_by_Camille_Pissarro.jpg/960px-Apple_Harvest_by_Camille_Pissarro.jpg?_=20141009033259"
+                        alt="Apple Harvest, 1888" />
+                    <figcaption>Apple Harvest, 1888</figcaption>
+                </figure>
+
+                <figure>
+                    <img src="https://www.guggenheim.org/wp-content/uploads/1862/01/78.2514.67_ph_web-1.jpg"
+                        alt="Pontoise Landscape, 1870s" />
+                    <figcaption>Pontoise Landscape, 1870s</figcaption>
+                </figure>
+
+                <figure>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Camille_Pissarro_-_Paysage_%C3%A0_Chaponval_-_1880.jpg/960px-Camille_Pissarro_-_Paysage_%C3%A0_Chaponval_-_1880.jpg?_=20150115194754"
+                        alt="Chaponval Road, 1880" />
+                    <figcaption>Chaponval Road, 1880</figcaption>
+                </figure>
+            </div>
+
+            <h2>Legacy</h2>
+            <p>Pissarro bridged Impressionism and Pointillism, always prioritizing natural light and harmonious color
+                over dramatic effect.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Allison | All Rights Reserved</p>
+    </footer>
+
+    <!-- JS (same pattern as home page) -->
+    <script>
+        // Sidebar toggle
+        const btn = document.getElementById('toggle-btn');
+        const sidebar = document.getElementById('sidebar');
+        const layoutMain = document.querySelector('main.layout-main');
+
+        btn.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            layoutMain.classList.toggle('shifted');
+        });
+
+        // Dropdown toggle
+        const dropdown = document.querySelector('.dropdown');
+        const dropdownMain = document.querySelector('.dropdown-main');
+
+        dropdownMain.addEventListener('click', (e) => {
+            e.preventDefault();
+            dropdown.classList.toggle('open');
+        });
+    </script>
+</body>
+
+</html>

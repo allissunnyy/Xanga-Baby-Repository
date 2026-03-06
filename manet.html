@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Édouard Manet – Impressionism Art Era</title>
+
+    <style>
+        /* Base page styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f7f7f7;
+            color: #000000;
+        }
+
+        header {
+            background: #f7f7f7;
+            color: black;
+            padding: 30px 0;
+        }
+
+        /* Toggle button */
+        #toggle-btn {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1001;
+            background: #f7f7f7;
+            color: #000000;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        /* Sidebar */
+        #sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 220px;
+            height: 100vh;
+            background: #f7f7f7;
+            color: #000000;
+            padding: 20px;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        #sidebar h2 {
+            margin-bottom: 20px;
+            font-size: 20px;
+            border-bottom: 1px solid #fff;
+            padding-bottom: 10px;
+        }
+
+        #sidebar a {
+            display: block;
+            color: #000000;
+            text-decoration: none;
+            margin: 10px 0;
+            padding: 6px 0;
+        }
+
+        #sidebar a:hover {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        /* Sidebar visible */
+        #sidebar.open {
+            transform: translateX(0);
+        }
+
+        /* Main layout container (for sidebar shift) */
+        main.layout-main {
+            padding: 40px 20px;
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+        }
+
+        main.layout-main.shifted {
+            margin-left: 220px;
+        }
+
+        /* Optional: basic responsiveness for sidebar */
+        @media (min-width: 768px) {
+            #sidebar {
+                transform: translateX(0);
+            }
+
+            main.layout-main {
+                margin-left: 220px;
+            }
+
+            #toggle-btn {
+                display: none;
+            }
+        }
+
+        /* Dropdown container */
+        .dropdown {
+            position: relative;
+        }
+
+        /* Main Artists link (click to toggle for now) */
+        .dropdown-main {
+            display: block;
+            color: #000000;
+            text-decoration: none;
+            margin: 10px 0;
+            padding: 6px 0;
+            cursor: pointer;
+        }
+
+        /* Dropdown menu */
+        .dropdown-menu {
+            display: none;
+            margin-left: 10px;
+        }
+
+        /* Links inside dropdown */
+        .dropdown-menu a {
+            display: block;
+            color: #000000;
+            text-decoration: none;
+            margin: 6px 0;
+            padding: 4px 0;
+            font-size: 14px;
+        }
+
+        .dropdown-menu a:hover {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        /* Show dropdown when open class is added */
+        .dropdown.open .dropdown-menu {
+            display: block;
+        }
+
+        /* Hero styling for artist page */
+        .hero {
+            min-height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            color: white;
+            background-image:
+                linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url("https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Edouard_Manet_-_Luncheon_on_the_Grass_-_Google_Art_Project.jpg/960px-Edouard_Manet_-_Luncheon_on_the_Grass_-_Google_Art_Project.jpg?_=20221224220838");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .content-wrapper {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .content-wrapper h1,
+        .content-wrapper h2 {
+            margin-bottom: 16px;
+        }
+
+        .content-wrapper p {
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px 0;
+            background: #f7f7f7;
+            color: #000000;
+        }
+
+        /* Artwork gallery reused but simplified to match overall aesthetic */
+        .artwork-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0 40px 0;
+            justify-items: center;
+        }
+
+        .artwork-gallery figure {
+            margin: 0;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .artwork-gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: block;
+        }
+
+        .artwork-gallery figcaption {
+            margin-top: 8px;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar toggle button -->
+    <button id="toggle-btn">☰ Menu</button>
+
+    <!-- Sidebar navigation (same structure/style as home) -->
+    <nav id="sidebar">
+        <h2>Logo</h2>
+        <a href="Impressionism.html">Home</a>
+        <a href="history.html">History</a>
+        <a href="examples.html">Gallery</a>
+        <a href="artists.html">Artists</a>
+
+        <div class="dropdown">
+            <a href="#artists" class="dropdown-main">More ▾</a>
+            <div class="dropdown-menu">
+                <a href="manet.html">Manet</a>
+                <a href="pissarro.html">Pissarro</a>
+                <a href="sisley.html">Sisley</a>
+                <a href="monet.html">Monet</a>
+                <a href="renoir.html">Renoir</a>
+                <a href="morisot.html">Morisot</a>
+                <a href="cassatt.html">Cassatt</a>
+                <a href="degas.html">Degas</a>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <center>
+            <h1>The Impressionist Art Era</h1>
+        </center>
+    </header>
+
+    <!-- Main layout container (used for sidebar shifting) -->
+    <main class="layout-main">
+        <!-- Hero for Manet -->
+        <section class="hero" id="manet">
+            <h1>Édouard Manet</h1>
+        </section>
+
+        <!-- Page content -->
+        <section class="content-wrapper">
+            <h1>Édouard Manet (1832–1883)</h1>
+            <p>Édouard Manet bridged Realism and Impressionism, challenging traditional art with bold subjects and
+                techniques. Though slightly older than core Impressionists, his modern themes and loose brushwork
+                inspired the movement.</p>
+
+            <h2>Key Works</h2>
+            <div class="artwork-gallery">
+                <figure>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Edouard_Manet_-_Olympia_-_Google_Art_ProjectFXD.jpg/960px-Edouard_Manet_-_Olympia_-_Google_Art_ProjectFXD.jpg"
+                        alt="Olympia, 1863" />
+                    <figcaption>Olympia, 1863</figcaption>
+                </figure>
+
+                <figure>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Edouard_Manet_-_Luncheon_on_the_Grass_-_Google_Art_Project.jpg/960px-Edouard_Manet_-_Luncheon_on_the_Grass_-_Google_Art_Project.jpg"
+                        alt="Luncheon on the Grass, 1863" />
+                    <figcaption>Luncheon on the Grass, 1863</figcaption>
+                </figure>
+
+                <figure>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/%22Un_Bar_aux_Folies-Berg%C3%A8re%22_by_%C3%89douard_Manet_%281882%29.jpg/960px-%22Un_Bar_aux_Folies-Berg%C3%A8re%22_by_%C3%89douard_Manet_%281882%29.jpg"
+                        alt="A Bar at the Folies-Bergère, 1882" />
+                    <figcaption>A Bar at the Folies-Bergère, 1882</figcaption>
+                </figure>
+
+                <figure>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Edouard_Manet_-_The_Balcony_-_Google_Art_Project.jpg/500px-Edouard_Manet_-_The_Balcony_-_Google_Art_Project.jpg"
+                        alt="The Balcony, 1868" />
+                    <figcaption>The Balcony, 1868</figcaption>
+                </figure>
+            </div>
+
+            <h2>Legacy</h2>
+            <p>Manet's flat colors, strong outlines, and contemporary subjects paved the way for Impressionism while
+                maintaining a unique modernist edge.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Allison | All Rights Reserved</p>
+    </footer>
+
+    <!-- JS: same pattern as home page -->
+    <script>
+        // Sidebar toggle
+        const btn = document.getElementById('toggle-btn');
+        const sidebar = document.getElementById('sidebar');
+        const layoutMain = document.querySelector('main.layout-main');
+
+        btn.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            layoutMain.classList.toggle('shifted');
+        });
+
+        // Dropdown toggle
+        const dropdown = document.querySelector('.dropdown');
+        const dropdownMain = document.querySelector('.dropdown-main');
+
+        dropdownMain.addEventListener('click', (e) => {
+            e.preventDefault();
+            dropdown.classList.toggle('open');
+        });
+    </script>
+</body>
+
+</html>
