@@ -1,126 +1,489 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Multi-step form</title>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
+    <title>Allison Parrott - Design Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: "Raleway", sans-serif
+        }
+
+        body,
+        html {
+            height: 100%;
+            line-height: 1.8;
+        }
+
+        /* Full height image header */
+        .bgimg-1 {
+            background-position: center;
+            background-size: cover;
+            background-image: url("https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=820&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+            min-height: 100%;
+        }
+
+        .w3-bar .w3-button {
+            padding: 16px;
+        }
+
+        /* Night Mode Styles */
+        .night-mode {
+            background-color: #1a1a1a !important;
+            color: #ffffff !important;
+        }
+
+        .night-mode .w3-white {
+            background-color: #000000 !important;
+        }
+
+        .night-mode .w3-light-grey {
+            background-color: #1f1f1f !important;
+        }
+
+        .night-mode .w3-dark-grey {
+            background-color: #333333 !important;
+        }
+
+        .night-mode .w3-grey {
+            background-color: #444444 !important;
+        }
+
+        .night-mode .w3-container {
+            background-color: #000000 !important;
+        }
+
+        .night-mode h1,
+        .night-mode h2,
+        .night-mode h3,
+        .night-mode h4,
+        .night-mode h5,
+        .night-mode h6 {
+            color: #ffffff !important;
+        }
+
+        .night-mode p {
+            color: #ffffff !important;
+        }
+
+        .night-mode .w3-card {
+            background-color: #2d2d2d !important;
+            color: #ffffff !important;
+        }
+
+        .night-mode .w3-button.w3-light-grey {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+        }
+
+        /* Bright Portfolio Button in Night Mode */
+        .night-mode .w3-display-left .w3-button.w3-white {
+            background-color: #a0fbf0ff !important;
+            /* Bright orange */
+            color: black !important;
+            border: 2px solid #a0fbf0ff !important;
+        }
+
+        .night-mode .w3-display-left .w3-button.w3-white {
+            background-color: #a0fbf0ff !important;
+            box-shadow: 0 4px 8px rgba(255,
+                    255,
+                    255,
+                    0.3) !important;
+        }
+
+        .night-mode .w3-text-grey {
+            color: #ffffffff !important;
+        }
+
+        .night-mode .w3-text-white {
+            color: #ffffff !important;
+        }
+    </style>
 </head>
+
 <body>
 
-  <!-- Sidebar start -->
+    <!-- Navbar (sit on top) -->
+    <div class="w3-top">
+        <div class="w3-bar w3-white w3-card" id="myNavbar">
+            <a href="#home" class="w3-bar-item w3-button w3-wide">ALLISON PARROTT</a>
 
-  Step 1
-  Your info
+            <!-- Right-sided navbar links -->
+            <div class="w3-right w3-hide-small">
+                <a href="#about-me" class="w3-bar-item w3-button">ABOUT</a>
+                <a href="#team" class="w3-bar-item w3-button"><i class="fa fa-user"></i> LANGUAGES</a>
+                <a href="#work" class="w3-bar-item w3-button"><i class="fa fa-th"></i> WORK</a>
+                <a href="#contact" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> CONTACT</a>
+                <!-- THEME TOGGLE BUTTON -->
+                <a href="javascript:void(0)" class="w3-bar-item w3-button w3-hover-opacity" id="themeToggle"
+                    onclick="toggleTheme()">
+                    <i class="fa fa-moon-o" id="themeIcon"></i> Night Mode
+                </a>
+            </div>
+            <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+            <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"
+                onclick="w3_open()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+    </div>
 
-  Step 2
-  Select plan
+    <!-- Sidebar on small screens when clicking the menu icon -->
+    <nav class="w3-sidebar w3-bar-block w3-white w3-card w3-animate-left w3-hide-medium w3-hide-large"
+        style="display:none" id="mySidebar">
+        <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close
+            ×</a>
+        <a href="#about-me" onclick="w3_close()" class="w3-bar-item w3-button">ABOUT</a>
+        <a href="#team" onclick="w3_close()" class="w3-bar-item w3-button">LANGUAGES</a>
+        <a href="#work" onclick="w3_close()" class="w3-bar-item w3-button">WORK</a>
+        <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>
+    </nav>
 
-  Step 3
-  Add-ons
+    <!-- Header with full-height image (Portfolio button FIXED) -->
+    <header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
+        <div class="w3-display-left w3-text-white" style="padding:48px">
+            <span class="w3-jumbo w3-hide-small">Design Portfolio</span><br>
+            <span class="w3-xxlarge w3-hide-large w3-hide-medium">Design Portfolio</span><br>
+            <span class="w3-large">Hey, my name is Allison and I love building responsive, accessible and forward
+                thinking designs.</span>
+            <p><a href="#work"
+                    class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Portfolio</a>
+            </p>
+        </div>
+        <div class="w3-display-bottomleft w3-text-grey w3-large" style="padding:24px 48px">
+            <i class="fa fa-instagram w3-hover-opacity"></i>
+            <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+            <i class="fa fa-linkedin w3-hover-opacity"></i>
+        </div>
+    </header>
+    <!-- About Me Section (PERFECTLY ALIGNED image on LEFT) -->
+    <div class="w3-container w3-white" style="padding:128px 16px" id="about-me">
+        <div class="w3-row-padding" style="align-items: center;">
+            <!-- IMAGE FIRST (left side) - PERFECTLY CENTERED VERTICALLY -->
+            <div class="w3-col m6"
+                style="display: flex; justify-content: center; align-items: center; padding: 40px 20px;">
+                <div style="text-align: center;">
+                    <img class="w3-image w3-round-large"
+                        src="https://64.media.tumblr.com/321529ca6b1fd047d513e2c23d629542/0fc23cfb901a6012-f0/s500x750/7eb20a331fc5faa2419ca9de3770b97820a37e75.jpg"
+                        alt="Allison Parrott" style="max-width: 350px; height: auto; display: block;">
+                </div>
+            </div>
+            <!-- TEXT SECOND (right side) -->
+            <div class="w3-col m6" style="padding: 20px;">
+                <h3>About Me</h3>
+                <p style="text-align: justify;">I'm Allison Parrott, a Toronto-based UX designer pursuing a degree in
+                    user experience design, with years of hands-on experience in graphic design and web design,
+                    seamlessly translating visual storytelling, intuitive layouts, and responsive interfaces into
+                    engaging, user-centered digital solutions. Passionate about crafting fluid, device-agnostic
+                    experiences—where strategic design transforms complex ideas into beautiful, accessible
+                    interfaces—I'm building a strong front-end skill set with HTML, CSS, JavaScript, React, TypeScript,
+                    and Python frameworks like Django, Flask, and FastAPI to deliver full-stack UX excellence in
+                    Ontario's vibrant tech scene. Explore my curated portfolio of innovative projects that solve real
+                    user challenges, backed by comprehensive support for evolving digital needs.</p>
+            </div>
+        </div>
+    </div>
 
-  Step 4
-  Summary
+    <!-- Key Features Section (id="about" changed to descriptive title) -->
+    <div class="w3-container" style="padding:128px 16px">
+        <h3 class="w3-center">ABOUT THE DESIGNS</h3>
+        <p class="w3-center w3-large">Key features of my designs</p>
+        <div class="w3-row-padding w3-center" style="margin-top:64px">
+            <div class="w3-quarter">
+                <i class="fa fa-desktop w3-margin-bottom w3-jumbo w3-center"></i>
+                <p class="w3-large">Responsive</p>
+                <p>Our designs adapt seamlessly to every device, ensuring your users enjoy a fluid experience from
+                    desktop to mobile.</p>
+            </div>
+            <div class="w3-quarter">
+                <i class="fa fa-heart w3-margin-bottom w3-jumbo"></i>
+                <p class="w3-large">Passion</p>
+                <p>Driven by passion, I craft interfaces that don't just function—they inspire and delight every
+                    visitor.</p>
+            </div>
+            <div class="w3-quarter">
+                <i class="fa fa-diamond w3-margin-bottom w3-jumbo"></i>
+                <p class="w3-large">Design</p>
+                <p>Strategic design transforms complex ideas into intuitive, beautiful digital experiences that
+                    resonate.</p>
+            </div>
+            <div class="w3-quarter">
+                <i class="fa fa-cog w3-margin-bottom w3-jumbo"></i>
+                <p class="w3-large">Support</p>
+                <p>Comprehensive support keeps your UX evolving, with ongoing guidance for maintenance and enhancements.
+                </p>
+            </div>
+        </div>
+    </div>
 
-  <!-- Sidebar end -->
+    <!-- Team Section -->
+    <div class="w3-container" style="padding:128px 16px" id="team">
+        <h3 class="w3-center">THE LANGUAGES</h3>
+        <p class="w3-center w3-large">Programming Languages I am fluent in and examples of my work.</p>
+        <div class="w3-row-padding w3-grayscale" style="margin-top:64px">
+            <div class="w3-col l3 m6 w3-margin-bottom">
+                <div class="w3-card">
+                    <img src="https://images.unsplash.com/photo-1669023414162-5bb06bbff0ec?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        alt="John" style="width:100%">
+                    <div class="w3-container">
+                        <h3>HTML</h3>
+                        <p class="w3-opacity">Essential Markup Foundation</p>
+                        <p>HTML structures content like text, images, and links, forming the backbone of every web page;
+                            it's not a programming language but a required standard for semantic, accessible layouts.
+                        </p>
+                        <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> View Work
+                            </button></p>
+                    </div>
+                </div>
+            </div>
+            <div class="w3-col l3 m6 w3-margin-bottom">
+                <div class="w3-card">
+                    <img src="https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        alt="Jane" style="width:100%">
+                    <div class="w3-container">
+                        <h3>CSS</h3>
+                        <p class="w3-opacity">Styling and Layout Core</p>
+                        <p>CSS controls visuals, layouts (e.g., Flexbox, Grid), animations, and responsiveness;
+                            preprocessors like Sass extend it for scalable styles in modern job requirements.</p>
+                        <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> View
+                                Work</button></p>
+                    </div>
+                </div>
+            </div>
+            <div class="w3-col l3 m6 w3-margin-bottom">
+                <div class="w3-card">
+                    <img src="https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        alt="Mike" style="width:100%">
+                    <div class="w3-container">
+                        <h3>JavaScript</h3>
+                        <p class="w3-opacity">Dynamic Interactivity Standard</p>
+                        <p>JavaScript powers client-side logic, DOM manipulation, events, and APIs; it's the only
+                            language browsers natively execute, essential for all front-end roles in all postings.</p>
+                        <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> View
+                                Work</button></p>
+                    </div>
+                </div>
+            </div>
+            <div class="w3-col l3 m6 w3-margin-bottom">
+                <div class="w3-card">
+                    <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=1031&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        alt="Dan" style="width:100%">
+                    <div class="w3-container">
+                        <h3>Python</h3>
+                        <p class="w3-opacity">Core Versatile Language</p>
+                        <p>Python is an interpreted, high-level language known for readability and vast libraries; it
+                            powers web back-ends (Django/Flask), data analysis, AI/ML, and automation scripts essential
+                            for full-stack roles.</p>
+                        <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> View Work
+                            </button></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-  <!-- Step 1 start -->
+    <!-- Promo Section "Statistics" -->
+    <div class="w3-container w3-row w3-center w3-white w3-padding-64">
+        <div class="w3-quarter">
+            <span class="w3-xxlarge">14+</span>
+            <br>Partners
+        </div>
+        <div class="w3-quarter">
+            <span class="w3-xxlarge">55+</span>
+            <br>Projects Done
+        </div>
+        <div class="w3-quarter">
+            <span class="w3-xxlarge">89+</span>
+            <br>Happy Clients
+        </div>
+        <div class="w3-quarter">
+            <span class="w3-xxlarge">150+</span>
+            <br>Meetings
+        </div>
+    </div>
 
-  Personal info
-  Please provide your name, email address, and phone number.
+    <!-- Work Section -->
+    <div class="w3-container" style="padding:128px 16px" id="work">
+        <h3 class="w3-center">MY WORK</h3>
+        <p class="w3-center w3-large">What I have done for people</p>
 
-  Name
-  e.g. Stephen King
+        <div class="w3-row-padding" style="margin-top:64px">
+            <div class="w3-col l3 m6">
+                <a href="https://allisonparrott.w3spaces.com/Impressionism.html" target="_blank">
+                    <img src="https://www.w3schools.com/w3images/tech_mic.jpg" style="width:100%; cursor: pointer;"
+                        class="w3-hover-opacity" alt="A microphone">
+                </a>
+            </div>
+            <div class="w3-col l3 m6">
+                <img src="https://www.w3schools.com/w3images/tech_phone.jpg" style="width:100%" onclick="onClick(this)"
+                    class="w3-hover-opacity" alt="A phone">
+            </div>
+            <div class="w3-col l3 m6">
+                <img src="https://www.w3schools.com/w3images/tech_drone.jpg" style="width:100%" onclick="onClick(this)"
+                    class="w3-hover-opacity" alt="A drone">
+            </div>
+            <div class="w3-col l3 m6">
+                <img src="https://www.w3schools.com/w3images/tech_sound.jpg" style="width:100%" onclick="onClick(this)"
+                    class="w3-hover-opacity" alt="Soundbox">
+            </div>
+        </div>
 
-  Email Address
-  e.g. stephenking@lorem.com
+        <div class="w3-row-padding w3-section">
+            <div class="w3-col l3 m6">
+                <img src="https://www.w3schools.com/w3images/tech_tablet.jpg" style="width:100%" onclick="onClick(this)"
+                    class="w3-hover-opacity" alt="A tablet">
+            </div>
+            <div class="w3-col l3 m6">
+                <img src="https://www.w3schools.com/w3images/tech_camera.jpg" style="width:100%" onclick="onClick(this)"
+                    class="w3-hover-opacity" alt="A camera">
+            </div>
+            <div class="w3-col l3 m6">
+                <img src="https://www.w3schools.com/w3images/tech_typewriter.jpg" style="width:100%"
+                    onclick="onClick(this)" class="w3-hover-opacity" alt="A typewriter">
+            </div>
+            <div class="w3-col l3 m6">
+                <img src="https://www.w3schools.com/w3images/tech_tableturner.jpg" style="width:100%"
+                    onclick="onClick(this)" class="w3-hover-opacity" alt="A tableturner">
+            </div>
+        </div>
+    </div>
 
-  Phone Number
-  e.g. +1 234 567 890
+    <!-- Modal for full size images on click-->
+    <div id="modal01" class="w3-modal w3-white" onclick="this.style.display='none'">
+        <span class="w3-button w3-xxlarge w3-white w3-padding-large w3-display-topright"
+            title="Close Modal Image">×</span>
+        <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+            <img id="img01" class="w3-image">
+            <p id="caption" class="w3-opacity w3-large"></p>
+        </div>
+    </div>
 
-  Next Step
+    <!-- Skills Section -->
+    <div class="w3-container w3-white w3-padding-64">
+        <div class="w3-row-padding">
+            <div class="w3-col m6">
+                <h3>My Skills.</h3>
+                <p>With years of hands-on experience in graphic design and web design, I craft exceptional user
+                    experience designs by seamlessly translating visual storytelling, intuitive layouts, and responsive
+                    interfaces into engaging, user-centered digital solutions.</p>
+            </div>
+            <div class="w3-col m6">
+                <p class="w3-wide"><i class="fa fa-camera w3-margin-right"></i>User Experience Design</p>
+                <div class="w3-grey">
+                    <div class="w3-container w3-dark-grey w3-center" style="width:90%">90%</div>
+                </div>
+                <p class="w3-wide"><i class="fa fa-desktop w3-margin-right"></i>Web Design</p>
+                <div class="w3-grey">
+                    <div class="w3-container w3-dark-grey w3-center" style="width:85%">85%</div>
+                </div>
+                <p class="w3-wide"><i class="fa fa-photo w3-margin-right"></i>Graphic Design</p>
+                <div class="w3-grey">
+                    <div class="w3-container w3-dark-grey w3-center" style="width:75%">75%</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-  <!-- Step 1 end -->
+    <!-- Contact Section -->
+    <div class="w3-container w3-white" style="padding:128px 16px" id="contact">
+        <h3 class="w3-center">CONTACT</h3>
+        <p class="w3-center w3-large">Lets get in touch. Send me a message:</p>
+        <div style="margin-top:48px">
+            <p><i class="fa fa-map-marker fa-fw w3-xxlarge w3-margin-right"></i> Toronto, ON, Canada</p>
+            <p><i class="fa fa-phone fa-fw w3-xxlarge w3-margin-right"></i> Phone: +6132430697</p>
+            <p><i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"> </i> Email: allisonparrott@live.com</p>
+            <br>
+            <form action="/action_page.php" target="_blank">
+                <p><input class="w3-input w3-border" type="text" placeholder="Name" required name="Name"></p>
+                <p><input class="w3-input w3-border" type="text" placeholder="Email" required name="Email"></p>
+                <p><input class="w3-input w3-border" type="text" placeholder="Subject" required name="Subject"></p>
+                <p><input class="w3-input w3-border" type="text" placeholder="Message" required name="Message"></p>
+                <p>
+                    <button class="w3-button w3-black" type="submit">
+                        <i class="fa fa-paper-plane"></i> SEND MESSAGE
+                    </button>
+                </p>
+            </form>
+            <!-- Image of location/map -->
+            <img src="https://www.w3schools.com/w3images/map.jpg" class="w3-image w3-greyscale"
+                style="width:100%;margin-top:48px">
+        </div>
+    </div>
 
-  <!-- Step 2 start -->
+    <!-- Footer -->
+    <footer class="w3-center w3-white w3-padding-64">
+        <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+        <div class="w3-xlarge w3-section"></i>
+            <i class="fa fa-instagram w3-hover-opacity"></i>
+            <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+            <i class="fa fa-linkedin w3-hover-opacity"></i>
+        </div>
+        <p class="w3-small">Portfolio by Allison Parrott | Toronto, Ontario</p>
+    </footer>
 
-  Select your plan
-  You have the option of monthly or yearly billing.
+    <script>
+        // Theme Toggle Function
+        function toggleTheme() {
+            document.body.classList.toggle('night-mode');
 
-  Arcade
-  $9/mo
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
 
-  Advanced
-  $12/mo
+            if (document.body.classList.contains('night-mode')) {
+                themeIcon.className = 'fa fa-sun-o';
+                themeToggle.innerHTML = '<i class="fa fa-sun-o" id="themeIcon"></i> Day Mode';
+                localStorage.setItem('theme', 'night');
+            } else {
+                themeIcon.className = 'fa fa-moon-o';
+                themeToggle.innerHTML = '<i class="fa fa-moon-o" id="themeIcon"></i> Night Mode';
+                localStorage.setItem('theme', 'day');
+            }
+        }
+        // Load saved theme on page load
+        window.onload = function () {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'night') {
+                document.body.classList.add('night-mode');
+                document.getElementById('themeIcon').className = 'fa fa-sun-o';
+                document.getElementById('themeToggle').innerHTML = '<i class="fa fa-sun-o" id="themeIcon"></i> Day Mode';
+            }
+        }
+        // [Keep ALL your existing functions: onClick, w3_open, w3_close]
+        function onClick(element) {
+            document.getElementById("img01").src = element.src;
+            document.getElementById("modal01").style.display = "block";
+            var captionText = document.getElementById("caption");
+            captionText.innerHTML = element.alt;
+        }
 
-  Pro
-  $15/mo
+        var mySidebar = document.getElementById("mySidebar");
 
-  Monthly
-  Yearly
+        function w3_open() {
+            if (mySidebar.style.display === 'block') {
+                mySidebar.style.display = 'none';
+            } else {
+                mySidebar.style.display = 'block';
+            }
+        }
 
-  Go Back
-  Next Step
+        function w3_close() {
+            mySidebar.style.display = "none";
+        }
+    </script>
 
-  <!-- Step 2 end -->
-
-  <!-- Step 3 start -->
-
-  Pick add-ons
-  Add-ons help enhance your gaming experience.
-
-  Online service
-  Access to multiplayer games
-  +$1/mo
-
-  Larger storage
-  Extra 1TB of cloud save
-  +$2/mo
-
-  Customizable Profile
-  Custom theme on your profile
-  +$2/mo
-
-  Go Back
-  Next Step
-
-  <!-- Step 3 end -->
-
-  <!-- Step 4 start -->
-
-  Finishing up
-  Double-check everything looks OK before confirming.
-
-  <!-- Dynamically add subscription and add-on selections here -->
-
-  Total (per month/year)
-
-  Go Back
-  Confirm
-
-  <!-- Step 4 end -->
-
-  <!-- Step 5 start -->
-
-  Thank you!
-
-  Thanks for confirming your subscription! We hope you have fun 
-  using our platform. If you ever need support, please feel free 
-  to email us at support@loremgaming.com.
-
-  <!-- Step 5 end -->
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
 </body>
+
 </html>
